@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Kansq Café</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bk:#06080c;--bk2:#10161e;--lb:#a8dcff;--lb2:#d6efff;--nb:#00d0ff;--ink:#06121c;--tx:#e6f4ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bk);color:var(--tx);font:400 16px/1.5 Outfit,system-ui,sans-serif;min-height:100vh}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bk);z-index:30}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(6,8,12,.88);backdrop-filter:blur(10px);border-bottom:1px solid #1b2a38}
+.brand{font-weight:700;font-size:22px;color:var(--lb);cursor:pointer}.brand b{color:var(--nb)}
+.hb{background:none;border:1px solid #274055;color:var(--lb);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer;transition:.2s}.hb:hover{border-color:var(--nb);box-shadow:0 0 12px #00d0ff55}
+#cc{background:var(--nb);color:var(--ink);border-radius:10px;padding:0 7px;margin-left:4px}
+main{max-width:900px;margin:0 auto;padding:16px}
+.view{display:none}.view.on{display:block;animation:in .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{box-shadow:0 0 10px #00d0ff55}50%{box-shadow:0 0 34px #00d0ffcc}}
+.hero{position:relative;border-radius:22px;overflow:hidden;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(135deg,#0b2233,#06080c 60%,#003a4d)}
+.bn{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4}.hero>*:not(.bn){position:relative}
+.ph{width:76px;height:76px;border-radius:14px;background:linear-gradient(135deg,#112233,#0a5d7a);overflow:hidden;flex:none;position:relative}
+.ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.ph.logo{width:84px;height:84px;border-radius:50%;border:2px solid var(--nb);box-shadow:0 0 24px #00d0ff88}
+.ph.wide{width:100%;height:130px;margin-bottom:8px}
+h1{margin:10px 0 0;font-size:42px;color:var(--lb2)}h1 b{color:var(--nb);text-shadow:0 0 18px var(--nb)}h2,h3{color:var(--lb)}
+.big{display:block;width:100%;margin:18px 0;padding:36px 20px;border-radius:22px;border:2px solid var(--nb);background:linear-gradient(120deg,var(--lb),var(--lb2));color:var(--ink);font:700 32px Outfit;cursor:pointer;animation:pulse 2.4s infinite;transition:.25s}.big:hover{transform:scale(1.02)}.big small{font-size:14px;color:#0a6d8c;margin-right:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.tile{background:var(--lb);color:var(--ink);border:0;border-radius:18px;padding:22px 16px;font:600 17px Outfit;cursor:pointer;text-align:left;transition:.25s;animation:in .6s both;animation-delay:var(--d,0s)}
+.tile i{display:block;font:normal 700 12px Outfit;color:#0a6d8c}.tile:hover{transform:translateY(-4px);box-shadow:0 8px 24px #00d0ff66;background:var(--lb2)}
+.card{background:var(--bk2);border:1px solid #1e3345;border-radius:18px;padding:16px;margin:12px 0;transition:.25s}.card.sel{border-color:var(--nb);box-shadow:0 0 20px #00d0ff88}.card.busy{opacity:.5}
+.it{display:flex;gap:12px;align-items:center}.pr{color:var(--nb);font-weight:700}
+.btn{border:0;border-radius:12px;padding:12px 20px;font:600 16px Outfit;cursor:pointer;background:var(--lb);color:var(--ink);transition:.2s;margin-top:10px}.btn.nb{background:var(--nb)}.btn:hover{filter:brightness(1.1);transform:translateY(-2px)}.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}.btn.gh{background:none;border:1px solid #2b4a60;color:var(--lb)}
+input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #2b4a60;background:#0a1118;color:var(--tx);font:inherit;margin:4px 0 10px}input:focus,select:focus,textarea:focus{outline:0;border-color:var(--nb);box-shadow:0 0 10px #00d0ff55}label{font-size:14px;color:var(--lb)}
+.tabs{display:flex;gap:8px}.tabs .btn{flex:1}
+.bd{padding:2px 10px;border-radius:10px;font-size:13px;font-weight:700;color:#000}.pending{background:#ffd166}.accepted{background:#4ade80}.declined,.cancelled{background:#ff6b6b}
+.cid{font:700 44px Outfit;letter-spacing:6px;color:var(--nb);text-shadow:0 0 16px var(--nb);text-align:center}
+.qr{width:200px;height:200px;margin:10px auto;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#000;position:relative;overflow:hidden}.qr img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+#md{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}#md.on{display:flex}
+.box{background:var(--bk2);border:1px solid var(--nb);border-radius:20px;padding:20px;max-width:440px;width:100%;max-height:88vh;overflow:auto;animation:in .3s}
+#ts{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--nb);color:var(--ink);padding:10px 20px;border-radius:20px;font-weight:600;transition:.3s;z-index:60}#ts.on{transform:translateX(-50%)}
+.hid{display:none}.dot{opacity:.1;cursor:pointer;padding:12px}.sb{background:var(--lb);color:var(--ink);text-decoration:none;display:block;text-align:center;border-radius:16px;padding:22px;font-weight:700;transition:.25s}.sb:hover{background:var(--nb);transform:translateY(-4px)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header><button class=hb id=bk onclick="back()" style="visibility:hidden">← Back</button><div class=brand onclick="stack=['home'];go('home',1)">Kan<b>sq</b></div><button class=hb id=cb onclick="cart()" style="display:none">My List <b id=cc>0</b></button></header>
+<main>
+<section class="view on" id="v-home"><div class=hero><img class=bn src="banner.jpg" alt="" onerror="this.remove()"><div class="ph logo"><img src="logo.jpg" alt="" onerror="this.remove()"></div><h1>Kan<b>sq</b></h1><p>Good food · Good vibes · Open 9 AM – 11 PM</p></div>
+<button class=big onclick="go('menu')"><small>1a</small>Menu</button><div class=grid id=hg></div>
+<p style="text-align:center;margin-top:34px;color:#5d7a90">© Kansq Café <span class=dot onclick="go('owner')">●</span></p></section>
+
+<section class=view id=v-menu><h2>Menu</h2><p style="margin-top:-8px;color:#8fb3cc">Tap “+ Add”, open My List (top right) and show it to the waiter.</p><div id=mn></div></section>
+
+<section class=view id=v-res><h2>Table Reservation</h2><div class=tabs><button class="btn nb" id=tb1 onclick="rt('book')">Book a table</button><button class=btn id=tb2 onclick="rt('trk')">Track / Cancel</button></div>
+<div id=rbook></div><div id=rtrk class=hid><div class=card><label>Your Customer ID</label><input id=ti placeholder="e.g. K7Q3"><button class="btn nb" onclick="trk()">Check status</button></div><div id=tr></div></div></section>
+
+<section class=view id=v-cel><h2>Birthday / Anniversary Packs</h2><p style="color:#8fb3cc">Sample packs — edit prices in the code.</p><div class=grid id=cl></div></section>
+<section class=view id=v-party><h2>Party Orders</h2><p style="color:#8fb3cc">Sample packages — edit prices in the code.</p><div class=grid id=pl></div></section>
+<section class=view id=v-social><h2>Social Media</h2><div class=grid><a class=sb target=_blank rel=noopener href="https://instagram.com/kansq">Instagram<br><small>@kansq</small></a><a class=sb target=_blank rel=noopener href="https://facebook.com/kansq">Facebook<br><small>/kansq</small></a><a class=sb target=_blank rel=noopener href="https://youtube.com/@kansq">YouTube<br><small>@kansq</small></a><a class=sb target=_blank rel=noopener href="https://wa.me/919101398033">WhatsApp<br><small>+91 91013 98033</small></a></div></section>
+<section class=view id=v-loc><h2>Find Us</h2><div class=card style="text-align:center;padding:30px"><svg width=90 height=110 viewBox="0 0 90 110"><path d="M45 4C24 4 8 20 8 40c0 28 37 64 37 64s37-36 37-64C82 20 66 4 45 4z" fill="none" stroke="#00d0ff" stroke-width=4 /><circle cx=45 cy=40 r=14 fill="#a8dcff"/></svg><h3>Kansq Café</h3><p>12 Café Street, Your City, India<br>Open daily · 9 AM – 11 PM</p><a class="btn nb" style="display:inline-block;text-decoration:none" target=_blank rel=noopener href="https://www.google.com/maps/search/?api=1&query=Kansq+Cafe">Open in Google Maps</a></div></section>
+<section class=view id=v-about><h2>About Us</h2><div class=card><p>Kansq is a cosy café serving fresh quick bites, hearty mains and cool drinks in a calm, modern space. Come for the food, stay for the view.</p></div><h2>Contact Us</h2><div class=card><p>Phone / WhatsApp: +91 91013 98033<br>Email: hello@kansq.com<br>Address: 12 Café Street, Your City<br>Hours: 9 AM – 11 PM, every day</p><button class="btn nb" onclick="frm('Special Enquiry',0)">Send an enquiry</button></div></section>
+<section class=view id=v-owner><div id=ow></div></section>
+</main>
+<div id=md onclick="if(event.target==this)closeM()"></div><div id=ts></div>
+<script>
+const $=s=>document.querySelector(s),WA='919101398033',FEE=89,M={},init={};
+const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?(M[k]??d):v}catch(e){return M[k]??d}};
+const sv=(k,v)=>{M[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad=n=>String(n).padStart(2,'0'),today=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
+const fm=m=>{const h=Math.floor(m/60);return((h+11)%12+1)+':'+pad(m%60)+' '+(h<12?'AM':'PM')};
+const BASE=[['french_fries','French Fries (Normal)',99,0],['schezwan_maggi','Schezwan Maggi',70,0],['cheese_butter_maggi','Cheese Butter Maggi',99,0],['veg_burger','Veg Burger',80,0],['spaghetti_carbonara','Spaghetti Carbonara',160,1],['grilled_chicken','Grilled Chicken',200,1],['paneer_cheese_pizza','Paneer Cheese Pizza',249,1],['fried_rice_with_egg','Fried Rice with Egg',140,1],['fresh_orange_juice','Fresh Orange Juice',60,2],['cold_ice_tea','Cold Ice Tea',50,2],['chocolate_milkshake','Chocolate Milkshake',90,2]];
+const CATS=['Appetizers & Quick Bites','Main Course','Beverages'];
+const TB=[['city','City View Table','Window seats · 2–4 guests','table_city_view'],['corner','Corner Table','Cosy & quiet · 2 guests','table_corner'],['cabin','Cabin Table','Private cabin · 4–6 guests','table_cabin'],['family','Family Table','Big round table · 6–8 guests','table_family']];
+const tn=id=>TB.find(t=>t[0]==id)[1];
+const items=()=>{const o=ld('kq_p',{});return BASE.map(([id,n,p,c])=>({id,n,c,p:o[id]&&o[id].p!=null?o[id].p:p,off:!!(o[id]&&o[id].off)}))};
+const img=id=>`<img src="${id}.jpg" alt="" onerror="this.remove()">`;
+const toast=t=>{const e=$('#ts');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1800)};
+const modal=h=>{$('#md').innerHTML='<div class=box>'+h+'</div>';$('#md').classList.add('on')},closeM=()=>$('#md').classList.remove('on');
+const wa=t=>{const u='https://wa.me/'+WA+'?text='+encodeURIComponent(t);if(!window.open(u,'_blank'))location.href=u};
+let stack=['home'],R,C={},A=0,OT='r';
+function go(v,b){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id=='v-'+v));if(!b&&stack[stack.length-1]!=v)stack.push(v);$('#bk').style.visibility=v=='home'?'hidden':'visible';$('#cb').style.display=v=='menu'?'':'none';scrollTo(0,0);if(init[v])init[v]()}
+function back(){stack.pop();go(stack[stack.length-1]||'home',1)}
+/* Home */
+[['1b','Table Reservation',"go('res')"],['1c','Birthday / Anniversary Pack',"go('cel')"],['1d','Party Orders',"go('party')"],['2','Social Media',"go('social')"],['3','Special Enquiry',"frm('Special Enquiry',0)"],['4','Location',"go('loc')"],['5','Contact & About Us',"go('about')"]].forEach(([n,t,f],i)=>$('#hg').insertAdjacentHTML('beforeend',`<button class=tile style="--d:${i*.07}s" onclick="${f}"><i>${n}</i>${t}</button>`));
+/* Menu + list */
+init.menu=()=>{let h='';CATS.forEach((c,ci)=>{h+=`<h3>${c}</h3><div class=grid>`+items().filter(x=>x.c==ci).map((x,i)=>`<div class="card it" style="animation:in .5s both;animation-delay:${i*.07}s"><div class=ph>${img(x.id)}</div><div style="flex:1">${x.n}<br><span class=pr>₹${x.p}</span></div><button class="btn nb" ${x.off?'disabled':''} onclick="add('${x.id}')">${x.off?'Sold out':'+ Add'}</button></div>`).join('')+'</div>'});$('#mn').innerHTML=h};
+const upd=()=>$('#cc').textContent=Object.values(C).reduce((a,b)=>a+b,0);
+function add(id){C[id]=(C[id]||0)+1;upd();toast('Added to your list')}
+function ch(id,d){C[id]=(C[id]||0)+d;if(C[id]<=0)delete C[id];upd();cart()}
+function cart(){const it=items().filter(x=>C[x.id]);let t=0;modal('<h3>My List</h3>'+(it.length?it.map(x=>{t+=x.p*C[x.id];return `<div class=it style="justify-content:space-between;margin:8px 0"><span>${x.n}<br><span class=pr>₹${x.p*C[x.id]}</span></span><span><button class="btn gh" style="margin:0" onclick="ch('${x.id}',-1)">−</button> <b>${C[x.id]}</b> <button class="btn gh" style="margin:0" onclick="ch('${x.id}',1)">+</button></span></div>`}).join('')+`<h3>Total ₹${t}</h3><p>Show this list to the waiter. Your order is processed at the café.</p><button class="btn gh" onclick="C={};upd();cart()">Clear</button> `:'<p>Your list is empty.</p>')+'<button class=btn onclick=closeM()>Close</button>')}
+/* Packs */
+const pk=(el,a,d)=>$(el).innerHTML=a.map(([t,p,f],i)=>`<div class=card style="animation:in .5s both;animation-delay:${i*.1}s"><h3>${t}</h3><div class=pr style="font-size:22px">${p}</div><p>${f}</p><button class="btn nb" onclick="frm('${t}',1)">Enquire on WhatsApp</button></div>`).join('');
+pk('#cl',[['Birthday Pack','₹1,499','Decorated table, balloons & banner, cake setup, 2 complimentary mocktails.'],['Anniversary Pack','₹1,999','Candle-lit table, flowers, cake setup, 2 mocktails, photo corner.'],['Combo Pack','₹2,999','Full decoration, cake, starters for 4, drinks and a private cabin.']]);
+pk('#pl',[['Snack Party','₹199 / head','Fries, Maggi & burgers. Min 10 guests.'],['Full Meal Party','₹349 / head','Starter, main course & a drink. Min 10 guests.'],['Mini Buffet','₹449 / head','Full spread with dessert. Min 20 guests.']]);
+function frm(t,d){modal(`<h3>${t}</h3><label>Name</label><input id=gn><label>Phone</label><input id=gp type=tel>${d?'<label>Date</label><input id=gd type=date>':''}<label>${d?'Details (guests, requirements)':'Your enquiry / request'}</label><textarea id=gm rows=4></textarea><button class="btn nb" onclick="gs('${t}',${d})">Send on WhatsApp</button> <button class="btn gh" onclick=closeM()>Close</button>`)}
+function gs(t,d){const n=$('#gn').value.trim(),p=$('#gp').value.trim(),m=$('#gm').value.trim();if(!n||!p||!m)return toast('Please fill all fields');wa(`Hello Kansq! ${t}\nName: ${n}\nPhone: ${p}\n`+(d?`Date: ${$('#gd').value||'-'}\n`:'')+`${d?'Details':'Enquiry'}: ${m}`);closeM()}
+/* Reservation */
+const busy=(t,d,m)=>ld('kq_r',[]).some(r=>r.table==t&&r.date==d&&['pending','accepted'].includes(r.status)&&m<r.m+105&&m+90>r.m); /* 90 min stay + hidden 15 min buffer */
+const fresh=()=>R={date:today(),time:null,table:null,pre:{}};
+init.res=()=>{fresh();rt('book');r1()};
+function rt(t){$('#rbook').classList.toggle('hid',t!='book');$('#rtrk').classList.toggle('hid',t!='trk');$('#tb1').classList.toggle('nb',t=='book');$('#tb2').classList.toggle('nb',t=='trk')}
+function r1(){const n=new Date(),nm=n.getHours()*60+n.getMinutes();let o='',f=null;for(let m=540;m<=1290;m+=30){const x=R.date==today()&&m<=nm;if(!x&&f==null)f=m;o+=`<option value=${m} ${x?'disabled':''}>${fm(m)}</option>`}
+if(R.time==null||(R.date==today()&&R.time<=nm))R.time=f;
+$('#rbook').innerHTML=`<div class=card><label>Date</label><input type=date min="${today()}" value="${R.date}" onchange="R.date=this.value||today();R.table=null;r1()"><label>Time (café open 9 AM – 11 PM)</label><select onchange="R.time=+this.value;R.table=null;r1t()">${o}</select></div><div class=grid id=tl></div><button class="btn nb" id=n1 onclick="r2()" disabled>Next →</button>`;if(R.time!=null)$('#rbook select').value=R.time;r1t()}
+function r1t(){if(R.time==null){$('#tl').innerHTML='<p>No slots left today. Please pick another date.</p>';return}
+$('#tl').innerHTML=TB.map(([id,n,d,im])=>{const b=busy(id,R.date,R.time);return `<div class="card ${R.table==id?'sel':''} ${b?'busy':''}" style="cursor:${b?'not-allowed':'pointer'}" onclick="${b?'':`R.table='${id}';r1t()`}"><div class="ph wide">${img(im)}</div><b>${n}</b><br><small>${d}</small><br><span class=bd style="background:${b?'#ff6b6b':'#4ade80'}">${b?'Booked':'Available'}</span></div>`}).join('');$('#n1').disabled=!R.table}
+function r2(){$('#rbook').innerHTML='<h3>Pre-order food <small>(optional)</small></h3>'+items().map(x=>`<div class="card it"><div class=ph>${img(x.id)}</div><div style="flex:1">${x.n}<br><span class=pr>₹${x.p}</span></div>${x.off?'Sold out':`<button class="btn gh" style="margin:0" onclick="pq('${x.id}',-1)">−</button><b id=q-${x.id} style="min-width:20px;text-align:center">${R.pre[x.id]||0}</b><button class="btn gh" style="margin:0" onclick="pq('${x.id}',1)">+</button>`}</div>`).join('')+'<button class="btn gh" onclick="r1()">← Back</button> <button class="btn nb" onclick="r3()">Next →</button>'}
+function pq(id,d){R.pre[id]=Math.max(0,(R.pre[id]||0)+d);$('#q-'+id).textContent=R.pre[id]}
+function r3(){$('#rbook').innerHTML=`<h3>Your details</h3><div class=card><label>Name</label><input id=fn value="${esc(R.name||'')}"><label>Phone</label><input id=fp type=tel value="${esc(R.phone||'')}"><label>Guests</label><input id=fg type=number min=1 max=12 value="${R.guests||2}"><label style="display:flex;gap:8px;align-items:flex-start"><input type=checkbox id=fc style="width:auto;margin-top:5px"><span>I understand that if I cancel, only 40% of the reservation amount (₹${FEE}) will be returned.</span></label></div><p>Reservation fee: <b class=pr>₹${FEE}</b></p><button class="btn gh" onclick="r2()">← Back</button> <button class="btn nb" onclick="r3n()">Proceed →</button><p id=er style="color:#ff8a8a"></p>`}
+function r3n(){const n=$('#fn').value.trim(),p=$('#fp').value.trim();let e='';if(!n)e='Please enter your name.';else if(p.replace(/\D/g,'').length<10)e='Enter a valid phone number.';else if(!$('#fc').checked)e='Please confirm the cancellation caution.';if(e)return $('#er').textContent=e;
+Object.assign(R,{name:n,phone:p,guests:$('#fg').value});const a=ld('kq_r',[]),ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';do{R.id='K'+[0,1,2].map(()=>ch[Math.random()*ch.length|0]).join('')}while(a.some(x=>x.id==R.id));r4()}
+const pre=()=>items().filter(x=>R.pre[x.id]).map(x=>x.n+' x'+R.pre[x.id]).join(', ')||'None';
+function r4(){$('#rbook').innerHTML=`<div class=card style="text-align:center"><p>Your Customer ID</p><div class=cid>${R.id}</div><p>Keep this ID. You will use it to track or cancel.</p></div><div class=card><b>${tn(R.table)}</b><br>${R.date} · ${fm(R.time)} · ${R.guests} guests<br>Pre-order: ${esc(pre())}</div><button class="btn nb" onclick="qr()">Next →</button>`}
+function qr(){modal(`<h3>Pay ₹${FEE} to reserve</h3><div class=qr><img src="qr.jpg" alt="" onerror="this.remove()">Payment QR</div><p style="text-align:center">Scan, pay ₹${FEE}, then enter the transaction ID.</p><label>Transaction ID</label><input id=tx><p id=te style="color:#ff8a8a;margin:0"></p><button class="btn nb" style="width:100%" onclick="done()">Done — send payment successful screenshot on WhatsApp</button>`)}
+function done(){const tx=$('#tx').value.trim();if(!tx)return $('#te').textContent='Please enter the transaction ID.';
+const r={id:R.id,name:R.name,phone:R.phone,guests:R.guests,table:R.table,date:R.date,m:R.time,pre:pre(),txn:tx,status:'pending',ts:Date.now()},a=ld('kq_r',[]);a.push(r);sv('kq_r',a);
+wa(`Hello Kansq! Table reservation\nName: ${r.name}\nPhone: ${r.phone}\nGuests: ${r.guests}\nTable: ${tn(r.table)}\nDate: ${r.date}\nTime: ${fm(r.m)}\nPre-order: ${r.pre}\nCustomer ID: ${r.id}\nTransaction ID: ${tx}\nPaid ₹${FEE}. Sending the payment successful screenshot now.`);closeM();
+$('#rbook').innerHTML=`<div class=card style="text-align:center"><h3>Almost done!</h3><div class=cid>${r.id}</div><p>Send the payment screenshot on WhatsApp. The owner will confirm your reservation shortly.</p><button class="btn nb" onclick="rt('trk');$('#ti').value='${r.id}';trk()">Track reservation</button></div>`;fresh()}
+function trk(){const id=$('#ti').value.trim().toUpperCase(),r=ld('kq_r',[]).find(x=>x.id==id),m={pending:'Waiting for the owner to verify your payment.',accepted:'Confirmed! We look forward to seeing you.',declined:'Declined by the owner. Please contact us.',cancelled:`Cancelled. Refund: ₹${(FEE*.4).toFixed(2)} (40%).`};
+$('#tr').innerHTML=!r?'<p>No reservation found for this ID on this device.</p>':`<div class=card><span class="bd ${r.status}">${r.status.toUpperCase()}</span><p>${m[r.status]}</p><b>${tn(r.table)}</b><br>${r.date} · ${fm(r.m)} · ${r.guests} guests<br><small>Pre-order: ${esc(r.pre)}</small>${['pending','accepted'].includes(r.status)?`<br><button class="btn gh" onclick="cx('${r.id}')">Cancel reservation</button>`:''}</div>`}
+function cx(id){modal(`<h3>Cancel reservation?</h3><p style="color:#ffd166">Caution: only 40% of the reservation amount (₹${(FEE*.4).toFixed(2)} of ₹${FEE}) will be returned.</p><button class="btn gh" onclick="closeM()">Keep it</button> <button class="btn nb" onclick="cx2('${id}')">Yes, cancel</button>`)}
+function cx2(id){const a=ld('kq_r',[]);a.find(x=>x.id==id).status='cancelled';sv('kq_r',a);closeM();trk()}
+/* Owner */
+init.owner=()=>A?dash():login();
+function login(){$('#ow').innerHTML='<div class=card style="max-width:360px;margin:30px auto"><h3>Owner login</h3><label>User ID</label><input id=ou autocomplete=off><label>Password</label><input id=op type=password><button class="btn nb" style="width:100%" onclick="lg()">Login</button><p id=oe style="color:#ff8a8a"></p></div>'}
+function lg(){if($('#ou').value=='Kansq123'&&$('#op').value=='1234567890'){A=1;dash()}else $('#oe').textContent='Wrong ID or password'}
+function dash(){const r=ld('kq_r',[]).slice().reverse(),c=s=>r.filter(x=>x.status==s).length,st=(l,v)=>`<div class=card style="text-align:center;margin:0"><div class=cid style="font-size:32px;letter-spacing:0">${v}</div>${l}</div>`;
+$('#ow').innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><h2>Owner Dashboard</h2><button class="btn gh" onclick="A=0;login()">Logout</button></div><div class=grid>${st('Pending',c('pending'))}${st('Accepted',c('accepted'))}${st('Total bookings',r.length)}</div><div class=tabs><button class="btn ${OT=='r'?'nb':''}" onclick="OT='r';dash()">Reservations</button><button class="btn ${OT=='m'?'nb':''}" onclick="OT='m';dash()">Menu & Prices</button></div>`+(OT=='r'?(r.length?r.map(x=>`<div class=card><span class="bd ${x.status}">${x.status.toUpperCase()}</span> <b>${x.id}</b> · ${esc(x.name)} · ${esc(x.phone)}<br>${tn(x.table)} · ${x.date} · ${fm(x.m)} · ${esc(x.guests)} guests<br><small>Transaction: ${esc(x.txn)} · Pre-order: ${esc(x.pre)}</small>${x.status=='cancelled'?`<br><small>Refund due: ₹${(FEE*.4).toFixed(2)}</small>`:''}${['pending','accepted'].includes(x.status)?`<br>${x.status=='pending'?`<button class="btn nb" onclick="os('${x.id}','accepted')">Accept</button> `:''}<button class="btn gh" onclick="os('${x.id}','declined')">Decline</button>`:''}</div>`).join(''):'<p>No reservations yet.</p>'):items().map(x=>`<div class="card it" style="justify-content:space-between"><span>${x.n}</span><span class=it>₹<input type=number min=0 value="${x.p}" style="width:90px;margin:0" onchange="op('${x.id}',this.value)"><label><input type=checkbox style="width:auto;margin:0 4px" ${x.off?'checked':''} onchange="oo('${x.id}',this.checked)">Sold out</label></span></div>`).join(''))}
+function os(id,s){const a=ld('kq_r',[]);a.find(x=>x.id==id).status=s;sv('kq_r',a);dash()}
+function op(id,v){const o=ld('kq_p',{});o[id]=o[id]||{};o[id].p=+v;sv('kq_p',o);toast('Price updated')}
+function oo(id,v){const o=ld('kq_p',{});o[id]=o[id]||{};o[id].off=v;sv('kq_p',o);toast('Availability updated')}
+</script></body></html>
